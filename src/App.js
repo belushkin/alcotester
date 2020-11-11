@@ -1,23 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
+import { 
+    Button, 
+    FormControl, 
+    Radio, 
+    FormLabel, 
+    RadioGroup, 
+    FormControlLabel
+} from '@material-ui/core';
+
+import DiscreteSlider from './components/Slider';
+import SimpleSelect from './components/SelectDrink';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <header className="App-header">
+            <p>Алкотестер онлайн</p>
+        </header>
+
+        <FormControl component="fieldset">
+            <FormLabel component="legend">Оберіть свою стать:</FormLabel>
+            <RadioGroup row aria-label="gender" name="gender">
+                <FormControlLabel 
+                    value="female" 
+                    control={<Radio />} 
+                    label="Жінка" 
+                />
+                <FormControlLabel 
+                    value="male" 
+                    control={<Radio />} 
+                    label="Чоловік" 
+                />
+            </RadioGroup>
+            <DiscreteSlider></DiscreteSlider>
+            <SimpleSelect></SimpleSelect>
+            <Button>Розрахувати</Button>
+        </FormControl>
     </div>
   );
 }
