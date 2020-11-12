@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
 
 const useStyles = makeStyles((theme) => ({
@@ -16,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleSelect() {
+export default function SimpleSelect1() {
   const classes = useStyles();
   const [age, setAge] = React.useState('');
 
@@ -26,27 +25,20 @@ export default function SimpleSelect() {
 
   return (
     <div>
-<FormControl className={classes.formControl}>
-        <InputLabel shrink id="demo-simple-select-placeholder-label-label">
-          Що ви пили?
-        </InputLabel>
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">Чи була закуска?</InputLabel>
         <Select
-          labelId="demo-simple-select-placeholder-label-label"
-          id="demo-simple-select-placeholder-label"
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
           value={age}
           onChange={handleChange}
-          displayEmpty
-          className={classes.selectEmpty}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Горілка - 40%</MenuItem>
-          <MenuItem value={20}>Вино</MenuItem>
-          <MenuItem value={30}>Пиво</MenuItem>
+          <MenuItem value={10}>Так, добряча</MenuItem>
+          <MenuItem value={20}>Так, середня</MenuItem>
+          <MenuItem value={30}>Ні, не було</MenuItem>
         </Select>
-        <FormHelperText>Label + placeholder</FormHelperText>
       </FormControl>
+      
     </div>
   );
 }

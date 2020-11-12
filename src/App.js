@@ -5,11 +5,13 @@ import {
     Radio, 
     FormLabel, 
     RadioGroup, 
-    FormControlLabel
+    FormControlLabel,
 } from '@material-ui/core';
 
 import DiscreteSlider from './components/Slider';
 import SimpleSelect from './components/SelectDrink';
+import SimpleSelect1 from './components/SelectSnack';
+import FormPropsTextFields from './components/AmountOfDrink';
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
             </RadioGroup>
             <DiscreteSlider></DiscreteSlider>
             <SimpleSelect></SimpleSelect>
+            <FormPropsTextFields></FormPropsTextFields>
+            <SimpleSelect1></SimpleSelect1>
             <Button>Розрахувати</Button>
         </FormControl>
     </div>
