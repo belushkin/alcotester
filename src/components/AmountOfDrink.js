@@ -15,9 +15,9 @@ export default function FormPropsTextFields() {
   const classes = useStyles();
 
   return (
-<form className={classes.root} noValidate autoComplete="off">
+    <form className={classes.root} noValidate autoComplete="off">
 
-  <TextField id="outlined-basic" label="Кількість напою" variant="outlined" />
-</form>
+      <TextField id="outlined-basic" label="Кількість напою" variant="outlined" />
+    </form>
   );
 }

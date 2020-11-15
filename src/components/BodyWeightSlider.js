@@ -1,5 +1,7 @@
-import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { 
+  FormLabel, 
+} from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 
@@ -13,19 +15,17 @@ function valuetext(value) {
   return `${value}°C`;
 }
 
-export default function DiscreteSlider() {
+export default function BodyWeightSlider() {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Typography id="discrete-slider" gutterBottom>
-        Маса тіла
-      </Typography>
+      <FormLabel component="legend">Маса тіла (кг):</FormLabel>
       <Slider
         defaultValue={70}
         getAriaValueText={valuetext}
         aria-labelledby="discrete-slider"
-        valueLabelDisplay="auto"
+        valueLabelDisplay="on"
         step={1}
         marks
         min={40}
