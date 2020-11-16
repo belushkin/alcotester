@@ -22,7 +22,6 @@ export default function CenteredGrid() {
     <div className={classes.root}>
       <Grid 
         container 
-        spacing={3}
         direction="column-reverse"
         justify="center"
         alignItems="center"

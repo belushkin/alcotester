@@ -4,8 +4,7 @@ export default function Header() {
     return (
       <Typography 
         variant="h2" 
-        component="h2"
-        paragraph="true"
+        paragraph={true}
         color="primary"
       >
         Алкотестер онлайн
