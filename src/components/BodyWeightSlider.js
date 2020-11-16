@@ -89,6 +89,7 @@ export default function BodyWeightSlider(props) {
       <BodySlider
         defaultValue={70}
         onChange={props.onChange}
+        value={props.value}
         aria-labelledby="discrete-slider"
         valueLabelDisplay="on"
         step={1}
