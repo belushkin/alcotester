@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Component } from "react";
 import BodyWeightSlider from './BodyWeightSlider';
+import DrinkInteractiveSliders from './drink/DrinkInteractiveSliders';
+
 import { 
     Button, 
     FormControl, 
@@ -8,26 +9,11 @@ import {
     FormLabel, 
     RadioGroup, 
     FormControlLabel,
-    InputLabel,
-    Select,
-    MenuItem,
   } from '@material-ui/core';
 
 import Box from '@material-ui/core/Box';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-}));
 
 export default function Form() {
-
   const [gender, setGender] = useState("male");
   const [weight, setWeight] = useState(70);
 
@@ -69,33 +55,7 @@ export default function Form() {
         </Box>
 
         {/* ===========Drink selection===================== */}
-        {/* <Box component="div" mt={3}>
-          <FormControl component="fieldset">
-            <InputLabel component="legend" id="select-drink-label">Напій</InputLabel>
-            <Select
-              labelId="select-drink-label"
-              id="select-drink"
-              // value={age}
-              // onChange={handleChange}
-            >
-              <MenuItem value={0.5}>"Безалкогольне" пиво (0.5%)</MenuItem>
-              <MenuItem value={0.7}>Кефір (0.7%)</MenuItem>
-              <MenuItem value={0.9}>Квас (0.9%)</MenuItem>
-            </Select>
-          </FormControl>
-        </Box> */}
-
-          {/* <Box component="span" mt={3}>
-            <BodyWeightSlider value={weight} onChange={this.handleChange}></BodyWeightSlider>
-          </Box>
-          <Box component="span" mt={3}>
-            
-          </Box>
-          <Button variant="contained" color="primary">Розрахувати</Button> */}
-        
-
-        
-
+        <DrinkInteractiveSliders></DrinkInteractiveSliders>
       </form>
     );
   }
