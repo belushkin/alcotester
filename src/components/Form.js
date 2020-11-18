@@ -8,6 +8,7 @@ import {
     FormLabel, 
     RadioGroup, 
     FormControlLabel,
+    Divider,
   } from '@material-ui/core';
 
 import Box from '@material-ui/core/Box';
@@ -97,6 +98,7 @@ export default function Form() {
           onChangeDrinkAmount={(e, value) => onChangeDrinkAmount(e, value, index)}
         ></DrinkSelectAndSlider>
       ))}
+      <Divider variant="middle" />
     </form>
   );
 }
