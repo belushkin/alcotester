@@ -99,6 +99,7 @@ export default function Form() {
         ></DrinkSelectAndSlider>
       ))}
       <Divider variant="middle" />
+      
     </form>
   );
 }
