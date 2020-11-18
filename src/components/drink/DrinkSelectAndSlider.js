@@ -7,6 +7,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Grid,
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -17,8 +18,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DrinkSelectAndSlider(props) {
   const classes = useStyles();
+
+  const deleteDrinkButton = (props.index === 0) ? "" : 
+  <Button 
+    variant="contained" 
+    onClick={props.onDelete} 
+    color="secondary"
+  >Видалити напій</Button>;
+
   return (
-    <Box component="div">
+    <Box component="div" mb={3}>
       <FormControl component="fieldset" className={classes.formControl}>
         <InputLabel id="select-drink-label">Напій (мл.)</InputLabel>
         <Select
@@ -57,8 +66,15 @@ export default function DrinkSelectAndSlider(props) {
           <MenuItem value={95.0}>Спирт (95%)</MenuItem>
         </Select>
       </FormControl>
-      <DrinkSlider></DrinkSlider>
-      <Button variant="contained" onClick={props.addDrink}>Додати напій</Button>
+      <DrinkSlider onChange={props.onChangeDrinkAmount} value={props.amount}></DrinkSlider>
+      <Grid container direction="row" justify="space-between" alignItems="center">
+        <Grid item>
+          <Button variant="contained" onClick={props.onAdd} color="primary">Додати напій</Button>
+        </Grid>
+        <Grid item>
+          {deleteDrinkButton}
+        </Grid>
+      </Grid>
     </Box>
   );
 }

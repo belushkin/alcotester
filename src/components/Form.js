@@ -3,7 +3,6 @@ import BodyWeightSlider from './BodyWeightSlider';
 import DrinkSelectAndSlider from './drink/DrinkSelectAndSlider';
 
 import { 
-    Button, 
     FormControl, 
     Radio, 
     FormLabel, 
@@ -34,6 +33,20 @@ export default function Form() {
     let drink = {..._drinks[i]};
     drink.drink = value.props.value;
     _drinks[i] = drink;
+    setDrinks(_drinks);
+  }
+
+  let onChangeDrinkAmount = (e, value, i) => {
+    let _drinks = [...drinks];
+    let drink = {..._drinks[i]};
+    drink.amount = value;
+    _drinks[i] = drink;
+    setDrinks(_drinks);
+  }
+
+  let onDeleteDrink = (e, value, i) => {
+    let _drinks = [...drinks];
+    _drinks.splice(i, 1);
     setDrinks(_drinks);
   }
 
@@ -75,13 +88,15 @@ export default function Form() {
       {drinks.map((item, index) => (
         <DrinkSelectAndSlider 
           key={index}
+          index={index}
           drink={item['drink']} 
           amount={item['amount']} 
           onChange={(e, value) => onChangeDrink(e, value, index)}
-          addDrink={() => onAddDrink()}
+          onDelete={(e, value) => onDeleteDrink(e, value, index)}
+          onAdd={() => onAddDrink()}
+          onChangeDrinkAmount={(e, value) => onChangeDrinkAmount(e, value, index)}
         ></DrinkSelectAndSlider>
       ))}
     </form>
   );
 }
-
