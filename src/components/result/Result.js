@@ -29,8 +29,27 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Result(props) {
     const classes = useStyles();
+
+    const Messages = Object.freeze({
+      NATURAL:              "Природний рівень алкоголю в організмі, кількість промілє алкоголю в крові: %s",
+      MINOR_INTOXICATION:   "Алкоголь має незначний вплив, кількість промілє алкоголю в крові: %s",
+      SLIGHT_INTOXICATION:  "Легке сп'яніння, кількість промілє алкоголю в крові: %s",
+      MODERATE_INTOXICATION:  "Сп'яніння середнього ступеню, кількість промілє алкоголю в крові: %s",
+      SEVERE_INTOXICATION:  "Стан сильного сп'яніння, кількість промілє алкоголю в крові: %s",
+      CRITICAL_CONDITION:  "Алкогольне отруєння, критичний стан, кількість промілє алкоголю в крові: %s",
+    });
+
+    const Severities = Object.freeze({
+      ERROR:    "error",
+      WARNING:  "warning",
+      INFO:     "info",
+      SUCCESS:  "success"
+    });
+
     const [open, setOpenBackdrop] = React.useState(false);
     const [openSnack, setOpenSnack] = React.useState(false);
+    const [message, setMessage] = React.useState(Messages.NATURAL);
+    const [severity, setSeverity] = React.useState(Severities.SUCCESS);
 
     const handleCloseBackdrop = () => {
       setOpenBackdrop(false);
@@ -42,8 +61,9 @@ export default function Result(props) {
     };
   
     const handleClickSnack = () => {
-      setOpenSnack(true);
+      calcAlco(props);
       setOpenBackdrop(false);
+      setOpenSnack(true);
     };
   
     const handleCloseSnack = (event, reason) => {
@@ -51,6 +71,35 @@ export default function Result(props) {
         return;
       }
       setOpenSnack(false);
+    };
+
+    const calcAlco = (props) => {
+      console.log(props)
+      let etanol = 0;
+      props.drinks.forEach(drink => etanol += (drink.amount*(drink.drink/100)));
+      let vidmarkDistribution = (props.gender === "male") ? 0.7 : 0.6;
+      let c = etanol/(props.weight * vidmarkDistribution);
+
+      if (c <= 0.3) {
+        setMessage(Messages.NATURAL.replace("%s", (c).toFixed(2)));
+        setSeverity(Severities.SUCCESS);
+      } else if (c > 0.3 && c <= 0.5) {
+        setMessage(Messages.MINOR_INTOXICATION.replace("%s", (c).toFixed(2)));
+        setSeverity(Severities.INFO);
+      } else if (c > 0.5 && c <= 1.5) {
+        setMessage(Messages.SLIGHT_INTOXICATION.replace("%s", (c).toFixed(2)));
+        setSeverity(Severities.INFO);
+      } else if (c > 1.5 && c <= 2.5) {
+        setMessage(Messages.MODERATE_INTOXICATION.replace("%s", (c).toFixed(2)));
+        setSeverity(Severities.WARNING);
+      } else if (c > 2.5 && c <= 3.0) {
+        setMessage(Messages.SEVERE_INTOXICATION.replace("%s", (c).toFixed(2)));
+        setSeverity(Severities.WARNING);
+      } else if (c > 3.0) {
+        setMessage(Messages.CRITICAL_CONDITION.replace("%s", (c).toFixed(2)));
+        setSeverity(Severities.ERROR);
+      }
+      console.log(c)
     };
 
     return (
@@ -67,8 +116,8 @@ export default function Result(props) {
             autoHideDuration={6000} 
             onClose={handleCloseSnack}
           >
-            <Alert onClose={handleCloseSnack} severity="success">
-              This is a success message!
+            <Alert onClose={handleCloseSnack} severity={severity}>
+              {message}
             </Alert>
           </Snackbar>
       </Box>
