@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import BodyWeightSlider from './BodyWeightSlider';
+import BodyWeightSlider from './weight/BodyWeightSlider';
 import DrinkSelectAndSlider from './drink/DrinkSelectAndSlider';
+import SnackSelect from './snack/SnackSelect';
+import DurationDrinkSlider from './duration/DurationDrinkSlider';
+import TimePassedSlider from './time/TimePassedSlider';
 
 import { 
     FormControl, 
@@ -9,6 +12,7 @@ import {
     RadioGroup, 
     FormControlLabel,
     Divider,
+    Button,
   } from '@material-ui/core';
 
 import Box from '@material-ui/core/Box';
@@ -20,6 +24,9 @@ export default function Form() {
     drink:4.0,
     amount:500
   }]);
+  const [snack, setSnack] = useState(1);
+  const [duration, setDuration] = useState(3);
+  const [time, setTime] = useState(12);
 
   let onAddDrink = () => {
     setDrinks([...drinks, {
@@ -98,8 +105,37 @@ export default function Form() {
           onChangeDrinkAmount={(e, value) => onChangeDrinkAmount(e, value, index)}
         ></DrinkSelectAndSlider>
       ))}
-      <Divider variant="middle" />
+
+      <Box component="div" mt={4}>
+        <Divider />
+      </Box>
+
+      <SnackSelect
+        snack={snack} 
+        onChange={e => setSnack(e.target.value)}
+      ></SnackSelect>
       
+      <Box component="div" mt={4}>
+        <FormControl component="fieldset">
+          <DurationDrinkSlider 
+            value={duration} 
+            onChange={(e, value) => setDuration(value)}
+          ></DurationDrinkSlider>
+        </FormControl>
+      </Box>
+
+      <Box component="div" mt={2}>
+        <FormControl component="fieldset">
+          <TimePassedSlider 
+            value={time} 
+            onChange={(e, value) => setTime(value)}
+          ></TimePassedSlider>
+        </FormControl>
+      </Box>
+
+      <Box component="div" mt={1}>
+        <Button variant="contained" color="primary">Розрахувати</Button>
+      </Box>
     </form>
   );
 }

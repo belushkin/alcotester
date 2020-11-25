@@ -87,7 +87,6 @@ export default function BodyWeightSlider(props) {
     <div className={classes.root}>
       <FormLabel component="legend">Маса тіла (кг):</FormLabel>
       <BodySlider
-        defaultValue={70}
         onChange={props.onChange}
         value={props.value}
         aria-labelledby="discrete-slider"

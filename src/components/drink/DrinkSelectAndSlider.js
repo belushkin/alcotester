@@ -69,7 +69,7 @@ export default function DrinkSelectAndSlider(props) {
       <DrinkSlider onChange={props.onChangeDrinkAmount} value={props.amount}></DrinkSlider>
       <Grid container direction="row" justify="space-between" alignItems="center">
         <Grid item>
-          <Button variant="contained" onClick={props.onAdd} color="primary">Додати напій</Button>
+          <Button variant="contained" onClick={props.onAdd}>Додати напій</Button>
         </Grid>
         <Grid item>
           {deleteDrinkButton}
