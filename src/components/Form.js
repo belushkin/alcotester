@@ -4,6 +4,7 @@ import DrinkSelectAndSlider from './drink/DrinkSelectAndSlider';
 import SnackSelect from './snack/SnackSelect';
 import DurationDrinkSlider from './duration/DurationDrinkSlider';
 import TimePassedSlider from './time/TimePassedSlider';
+import Result from './result/Result';
 
 import { 
     FormControl, 
@@ -13,9 +14,9 @@ import {
     FormControlLabel,
     Divider,
     Button,
+    Container,
+    Box,
   } from '@material-ui/core';
-
-import Box from '@material-ui/core/Box';
 
 export default function Form() {
   const [gender, setGender] = useState("male");
@@ -59,83 +60,90 @@ export default function Form() {
   }
 
   return (
-    <form>
-      <Box component="div">
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Оберіть свою стать:</FormLabel>
-          <RadioGroup 
-            onChange={e => setGender(e.target.value)} 
-            value={gender}
-            name="gender"
-            row 
-            aria-label="gender" 
-          >
-          <FormControlLabel
-            value="male"
-            control={<Radio color="primary"/>}
-            label="Чоловік"
-          />
-          <FormControlLabel
-            value="female"
-            control={<Radio color="primary"/>}
-            label="Жінка"
-          />
-          </RadioGroup>
-        </FormControl>
-      </Box>
+    <Box component="div">
+      <form>
+        <Box component="div">
+          <FormControl component="fieldset">
+            <FormLabel component="legend">Оберіть свою стать:</FormLabel>
+            <RadioGroup 
+              onChange={e => setGender(e.target.value)} 
+              value={gender}
+              name="gender"
+              row 
+              aria-label="gender" 
+            >
+            <FormControlLabel
+              value="male"
+              control={<Radio color="primary"/>}
+              label="Чоловік"
+            />
+            <FormControlLabel
+              value="female"
+              control={<Radio color="primary"/>}
+              label="Жінка"
+            />
+            </RadioGroup>
+          </FormControl>
+        </Box>
 
-      <Box component="div" mt={3}>
-        <FormControl component="fieldset">
-          <BodyWeightSlider 
-            value={weight} 
-            onChange={(e, value) => setWeight(value)}
-          ></BodyWeightSlider>
-        </FormControl>
-      </Box>
+        <Box component="div" mt={3}>
+          <FormControl component="fieldset">
+            <BodyWeightSlider 
+              value={weight} 
+              onChange={(e, value) => setWeight(value)}
+            ></BodyWeightSlider>
+          </FormControl>
+        </Box>
 
-      {drinks.map((item, index) => (
-        <DrinkSelectAndSlider 
-          key={index}
-          index={index}
-          drink={item['drink']} 
-          amount={item['amount']} 
-          onChange={(e, value) => onChangeDrink(e, value, index)}
-          onDelete={(e, value) => onDeleteDrink(e, value, index)}
-          onAdd={() => onAddDrink()}
-          onChangeDrinkAmount={(e, value) => onChangeDrinkAmount(e, value, index)}
-        ></DrinkSelectAndSlider>
-      ))}
+        {drinks.map((item, index) => (
+          <DrinkSelectAndSlider 
+            key={index}
+            index={index}
+            drink={item['drink']} 
+            amount={item['amount']} 
+            onChange={(e, value) => onChangeDrink(e, value, index)}
+            onDelete={(e, value) => onDeleteDrink(e, value, index)}
+            onAdd={() => onAddDrink()}
+            onChangeDrinkAmount={(e, value) => onChangeDrinkAmount(e, value, index)}
+          ></DrinkSelectAndSlider>
+        ))}
 
-      <Box component="div" mt={4}>
-        <Divider />
-      </Box>
+        <Box component="div" mt={4}>
+          <Divider />
+        </Box>
 
-      <SnackSelect
-        snack={snack} 
-        onChange={e => setSnack(e.target.value)}
-      ></SnackSelect>
-      
-      <Box component="div" mt={4}>
-        <FormControl component="fieldset">
-          <DurationDrinkSlider 
-            value={duration} 
-            onChange={(e, value) => setDuration(value)}
-          ></DurationDrinkSlider>
-        </FormControl>
-      </Box>
+        <SnackSelect
+          snack={snack} 
+          onChange={e => setSnack(e.target.value)}
+        ></SnackSelect>
+        
+        <Box component="div" mt={4}>
+          <FormControl component="fieldset">
+            <DurationDrinkSlider 
+              value={duration} 
+              onChange={(e, value) => setDuration(value)}
+            ></DurationDrinkSlider>
+          </FormControl>
+        </Box>
 
-      <Box component="div" mt={2}>
-        <FormControl component="fieldset">
-          <TimePassedSlider 
-            value={time} 
-            onChange={(e, value) => setTime(value)}
-          ></TimePassedSlider>
-        </FormControl>
-      </Box>
+        <Box component="div" mt={2}>
+          <FormControl component="fieldset">
+            <TimePassedSlider 
+              value={time} 
+              onChange={(e, value) => setTime(value)}
+            ></TimePassedSlider>
+          </FormControl>
+        </Box>
 
-      <Box component="div" mt={1}>
-        <Button variant="contained" color="primary">Розрахувати</Button>
-      </Box>
-    </form>
+        <Result
+          gender={gender}
+          weight={weight}
+          drinks={drinks}
+          snack={snack}
+          duration={duration}
+          time={time}
+        ></Result>
+      </form>
+    </Box>
   );
 }
