@@ -31,12 +31,12 @@ export default function Result(props) {
     const classes = useStyles();
 
     const Messages = Object.freeze({
-      NATURAL:              "Природний рівень алкоголю в організмі, кількість промілє алкоголю в крові: %s ‰",
-      MINOR_INTOXICATION:   "Алкоголь має незначний вплив, кількість промілє алкоголю в крові: %s ‰",
-      SLIGHT_INTOXICATION:  "Легке сп'яніння, кількість промілє алкоголю в крові: %s ‰",
-      MODERATE_INTOXICATION:  "Сп'яніння середнього ступеню, кількість промілє алкоголю в крові: %s ‰",
-      SEVERE_INTOXICATION:  "Стан сильного сп'яніння, кількість промілє алкоголю в крові: %s ‰",
-      CRITICAL_CONDITION:  "Алкогольне отруєння, критичний стан, кількість промілє алкоголю в крові: %s ‰",
+      NATURAL:              "Природний рівень алкоголю в організмі, кількість промілє алкоголю в крові: %s ‰, за руль можна вже!",
+      MINOR_INTOXICATION:   "Алкоголь має незначний вплив, кількість промілє алкоголю в крові: %s ‰, за руль можна через %e годин!",
+      SLIGHT_INTOXICATION:  "Легке сп'яніння, кількість промілє алкоголю в крові: %s ‰, за руль можна через %e годин!",
+      MODERATE_INTOXICATION:  "Сп'яніння середнього ступеню, кількість промілє алкоголю в крові: %s ‰, за руль можна через %e годин!",
+      SEVERE_INTOXICATION:  "Стан сильного сп'яніння, кількість промілє алкоголю в крові: %s ‰, за руль можна через %e годин!",
+      CRITICAL_CONDITION:  "Алкогольне отруєння, критичний стан, кількість промілє алкоголю в крові: %s ‰, за руль можна через %e годин!",
     });
 
     const Severities = Object.freeze({
@@ -86,29 +86,32 @@ export default function Result(props) {
       let c = etanol/(props.weight * vidmarkDistribution);
 
       // elimination
-      c -= (props.time + props.duration) * 0.15
+      c -= (props.time + props.duration) * 0.15;
 
-      c = (c < 0) ? 0 : c; 
+      c = (c < 0) ? 0 : c;
+
+      let timeLeft = Math.ceil(c / 0.15);      
+
       if (c <= 0) {
         setMessage(Messages.NATURAL.replace("%s", (c).toFixed(2)));
         setSeverity(Severities.SUCCESS);
       } else if (c > 0 && c <= 0.3) {
-        setMessage(Messages.MINOR_INTOXICATION.replace("%s", (c).toFixed(2)));
+        setMessage(Messages.MINOR_INTOXICATION.replace("%s", (c).toFixed(2)).replace("%e", timeLeft));
         setSeverity(Severities.INFO);
       } else if (c > 0.3 && c <= 0.5) {
-        setMessage(Messages.MINOR_INTOXICATION.replace("%s", (c).toFixed(2)));
+        setMessage(Messages.MINOR_INTOXICATION.replace("%s", (c).toFixed(2)).replace("%e", timeLeft));
         setSeverity(Severities.INFO);
       } else if (c > 0.5 && c <= 1.5) {
-        setMessage(Messages.SLIGHT_INTOXICATION.replace("%s", (c).toFixed(2)));
+        setMessage(Messages.SLIGHT_INTOXICATION.replace("%s", (c).toFixed(2)).replace("%e", timeLeft));
         setSeverity(Severities.INFO);
       } else if (c > 1.5 && c <= 2.5) {
-        setMessage(Messages.MODERATE_INTOXICATION.replace("%s", (c).toFixed(2)));
+        setMessage(Messages.MODERATE_INTOXICATION.replace("%s", (c).toFixed(2)).replace("%e", timeLeft));
         setSeverity(Severities.WARNING);
       } else if (c > 2.5 && c <= 3.0) {
-        setMessage(Messages.SEVERE_INTOXICATION.replace("%s", (c).toFixed(2)));
+        setMessage(Messages.SEVERE_INTOXICATION.replace("%s", (c).toFixed(2)).replace("%e", timeLeft));
         setSeverity(Severities.WARNING);
       } else if (c > 3.0) {
-        setMessage(Messages.CRITICAL_CONDITION.replace("%s", (c).toFixed(2)));
+        setMessage(Messages.CRITICAL_CONDITION.replace("%s", (c).toFixed(2)).replace("%e", timeLeft));
         setSeverity(Severities.ERROR);
       }
     };
