@@ -25,7 +25,7 @@ export default function Form() {
     drink:4.0,
     amount:500
   }]);
-  const [snack, setSnack] = useState(1);
+  const [snack, setSnack] = useState(20);
   const [duration, setDuration] = useState(3);
   const [time, setTime] = useState(12);
 

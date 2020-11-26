@@ -26,9 +26,9 @@ export default function SnackSelect(props) {
           value={props.snack}
           onChange={props.onChange}
         >
-          <MenuItem value={0}>Ні, не було</MenuItem>
-          <MenuItem value={1}>Так, середня</MenuItem>
-          <MenuItem value={2}>Так, добряча</MenuItem>
+          <MenuItem value={10}>Ні, не було</MenuItem>
+          <MenuItem value={20}>Так, середня</MenuItem>
+          <MenuItem value={30}>Так, добряча</MenuItem>
         </Select>
       </FormControl>
     </Box>

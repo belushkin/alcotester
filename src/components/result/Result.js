@@ -31,12 +31,12 @@ export default function Result(props) {
     const classes = useStyles();
 
     const Messages = Object.freeze({
-      NATURAL:              "Природний рівень алкоголю в організмі, кількість промілє алкоголю в крові: %s",
-      MINOR_INTOXICATION:   "Алкоголь має незначний вплив, кількість промілє алкоголю в крові: %s",
-      SLIGHT_INTOXICATION:  "Легке сп'яніння, кількість промілє алкоголю в крові: %s",
-      MODERATE_INTOXICATION:  "Сп'яніння середнього ступеню, кількість промілє алкоголю в крові: %s",
-      SEVERE_INTOXICATION:  "Стан сильного сп'яніння, кількість промілє алкоголю в крові: %s",
-      CRITICAL_CONDITION:  "Алкогольне отруєння, критичний стан, кількість промілє алкоголю в крові: %s",
+      NATURAL:              "Природний рівень алкоголю в організмі, кількість промілє алкоголю в крові: %s ‰",
+      MINOR_INTOXICATION:   "Алкоголь має незначний вплив, кількість промілє алкоголю в крові: %s ‰",
+      SLIGHT_INTOXICATION:  "Легке сп'яніння, кількість промілє алкоголю в крові: %s ‰",
+      MODERATE_INTOXICATION:  "Сп'яніння середнього ступеню, кількість промілє алкоголю в крові: %s ‰",
+      SEVERE_INTOXICATION:  "Стан сильного сп'яніння, кількість промілє алкоголю в крові: %s ‰",
+      CRITICAL_CONDITION:  "Алкогольне отруєння, критичний стан, кількість промілє алкоголю в крові: %s ‰",
     });
 
     const Severities = Object.freeze({
@@ -75,14 +75,26 @@ export default function Result(props) {
 
     const calcAlco = (props) => {
       console.log(props)
+      
       let etanol = 0;
       props.drinks.forEach(drink => etanol += (drink.amount*(drink.drink/100)));
+      
+      // resorbsion
+      etanol -= etanol*(props.snack/100)
+
       let vidmarkDistribution = (props.gender === "male") ? 0.7 : 0.6;
       let c = etanol/(props.weight * vidmarkDistribution);
 
-      if (c <= 0.3) {
+      // elimination
+      c -= (props.time + props.duration) * 0.15
+
+      c = (c < 0) ? 0 : c; 
+      if (c <= 0) {
         setMessage(Messages.NATURAL.replace("%s", (c).toFixed(2)));
         setSeverity(Severities.SUCCESS);
+      } else if (c > 0 && c <= 0.3) {
+        setMessage(Messages.MINOR_INTOXICATION.replace("%s", (c).toFixed(2)));
+        setSeverity(Severities.INFO);
       } else if (c > 0.3 && c <= 0.5) {
         setMessage(Messages.MINOR_INTOXICATION.replace("%s", (c).toFixed(2)));
         setSeverity(Severities.INFO);
@@ -99,7 +111,6 @@ export default function Result(props) {
         setMessage(Messages.CRITICAL_CONDITION.replace("%s", (c).toFixed(2)));
         setSeverity(Severities.ERROR);
       }
-      console.log(c)
     };
 
     return (

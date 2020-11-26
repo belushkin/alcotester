@@ -16,6 +16,9 @@ const iOSBoxShadow =
 
 const marks = [
   {
+    value: 0
+  },
+  {
     value: 1
   },
   {
@@ -102,7 +105,7 @@ export default function TimePassedSlider(props) {
         valueLabelDisplay="on"
         step={1}
         marks={marks}
-        min={1}
+        min={0}
         max={36}
       />
     </div>
