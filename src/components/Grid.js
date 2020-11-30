@@ -1,13 +1,12 @@
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { 
+  Grid, 
+  Container,
+  Box
+} from '@material-ui/core';
 
 import Header from './Header';
 import Form from './Form';
-
-// 
-// import SimpleSelect from './components/SelectDrink';
-// import SimpleSelect1 from './components/SelectSnack';
-// import FormPropsTextFields from './components/AmountOfDrink';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -19,8 +18,7 @@ export default function CenteredGrid() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <Grid 
+    <Grid 
         container 
         direction="column-reverse"
         justify="center"
@@ -29,8 +27,7 @@ export default function CenteredGrid() {
         <Grid item xs={12}>
           <Header></Header>
           <Form></Form>
-        </Grid>
       </Grid>
-    </div>
+    </Grid>
   );
 }

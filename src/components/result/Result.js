@@ -74,8 +74,6 @@ export default function Result(props) {
     };
 
     const calcAlco = (props) => {
-      console.log(props)
-      
       let etanol = 0;
       props.drinks.forEach(drink => etanol += (drink.amount*(drink.drink/100)));
       
@@ -117,7 +115,7 @@ export default function Result(props) {
     };
 
     return (
-      <Box component="div" mt={1} className={classes.root}>
+      <Box component="div" mt={1} mb={1} className={classes.root}>
           <Button variant="contained" color="primary" onClick={handleOpenBackdrop}>
             Розрахувати
           </Button>
