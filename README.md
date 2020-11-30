@@ -12,6 +12,9 @@ Alcotester application for measuring amount of alcohol in the blood in Ukrainian
 
 Application tuned for mobile devices, blazing fast and 100% accurate
 
+## Commands
+npm run deploy
+
 ## Contributors
 - @belushkin
 - @rozovyk
