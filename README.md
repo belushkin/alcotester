@@ -1,4 +1,4 @@
-# Alcotester React APP
+# Alcotester React app
 
 Alcotester application for measuring amount of alcohol in the blood in Ukrainian language for Ukrainian market
 
@@ -10,10 +10,13 @@ Alcotester application for measuring amount of alcohol in the blood in Ukrainian
 ## How app does look like
 ![Alcotester](./public/alcotester.png)
 
+## Location of the application
+- https://alcotester.xyz/
+
 Application tuned for mobile devices, blazing fast and 100% accurate
 
 ## Commands
-npm run deploy
+- npm run deploy (deploy the app to the github pages)
 
 ## Contributors
 - @belushkin
