@@ -1,4 +1,3 @@
-import DrinkSlider from './DrinkSlider';
 import { makeStyles } from '@material-ui/core/styles';
 import { 
   Button, 
@@ -13,10 +12,11 @@ import {
 const useStyles = makeStyles((theme) => ({
   formControl: {
     minWidth: 160,
+    margin: theme.spacing(0, 2, 3, 0),
   },
 }));
 
-export default function DrinkSelectAndSlider(props) {
+export default function DrinkSelect(props) {
   const classes = useStyles();
 
   const deleteDrinkButton = (props.index === 0) ? "" : 
@@ -29,7 +29,7 @@ export default function DrinkSelectAndSlider(props) {
   return (
     <Box component="div" mb={3}>
       <FormControl component="fieldset" className={classes.formControl}>
-        <InputLabel id="select-drink-label">Напій (мл.)</InputLabel>
+        <InputLabel id="select-drink-label">Напій</InputLabel>
         <Select
           labelId="select-drink-label"
           id="select-drink"
@@ -66,7 +66,19 @@ export default function DrinkSelectAndSlider(props) {
           <MenuItem value={95.0}>Спирт (95%)</MenuItem>
         </Select>
       </FormControl>
-      <DrinkSlider onChange={props.onChangeDrinkAmount} value={props.amount}></DrinkSlider>
+      <FormControl component="fieldset" className={classes.formControl}>
+        <InputLabel id="select-volume-label">Об'єм (мілілітри):</InputLabel>
+        <Select
+          labelId="select-volume-label"
+          id="select-volume"
+          value={props.amount}
+          onChange={props.onChangeDrinkAmount}
+        >
+          {
+            Array(201).fill().map((_, i) => <MenuItem key={i} value={i*50}>{i*50}</MenuItem>)
+          }
+        </Select>
+      </FormControl>
       <Grid container direction="row" justify="space-between" alignItems="center">
         <Grid item>
           <Button variant="contained" onClick={props.onAdd}>Додати напій</Button>

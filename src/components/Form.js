@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import BodyWeightSlider from './weight/BodyWeightSlider';
-import DrinkSelectAndSlider from './drink/DrinkSelectAndSlider';
+import BodyWeightSelect from './weight/BodyWeightSelect';
+import DrinkSelect from './drink/DrinkSelect';
 import SnackSelect from './snack/SnackSelect';
 import DurationDrinkSlider from './duration/DurationDrinkSlider';
 import TimePassedSlider from './time/TimePassedSlider';
@@ -20,7 +20,7 @@ import {
 
 export default function Form() {
   const [gender, setGender] = useState("male");
-  const [weight, setWeight] = useState(70);
+  const [weight, setWeight] = useState(87);
   const [drinks, setDrinks] = useState([{
     drink:4.0,
     amount:500
@@ -88,15 +88,15 @@ export default function Form() {
 
         <Box component="div" mt={3}>
           <FormControl component="fieldset">
-            <BodyWeightSlider 
-              value={weight} 
-              onChange={(e, value) => setWeight(value)}
-            ></BodyWeightSlider>
+            <BodyWeightSelect 
+              weight={weight} 
+              onChange={(e, value) => setWeight(value.props.value)}
+            ></BodyWeightSelect>
           </FormControl>
         </Box>
 
         {drinks.map((item, index) => (
-          <DrinkSelectAndSlider 
+          <DrinkSelect 
             key={index}
             index={index}
             drink={item['drink']} 
@@ -104,15 +104,15 @@ export default function Form() {
             onChange={(e, value) => onChangeDrink(e, value, index)}
             onDelete={(e, value) => onDeleteDrink(e, value, index)}
             onAdd={() => onAddDrink()}
-            onChangeDrinkAmount={(e, value) => onChangeDrinkAmount(e, value, index)}
-          ></DrinkSelectAndSlider>
+            onChangeDrinkAmount={(e, value) => onChangeDrinkAmount(e, value.props.value, index)}
+          ></DrinkSelect>
         ))}
 
         <Box component="div" mt={4}>
           <Divider />
         </Box>
 
-        <SnackSelect
+        {/* <SnackSelect
           snack={snack} 
           onChange={e => setSnack(e.target.value)}
         ></SnackSelect>
@@ -142,7 +142,7 @@ export default function Form() {
           snack={snack}
           duration={duration}
           time={time}
-        ></Result>
+        ></Result> */}
       </form>
     </Box>
   );
