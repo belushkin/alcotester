@@ -9,7 +9,7 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    minWidth: 160,
+    minWidth: 230,
   },
 }));
 

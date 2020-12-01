@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import BodyWeightSelect from './weight/BodyWeightSelect';
 import DrinkSelect from './drink/DrinkSelect';
 import SnackSelect from './snack/SnackSelect';
-import DurationDrinkSlider from './duration/DurationDrinkSlider';
-import TimePassedSlider from './time/TimePassedSlider';
+import DurationDrinkSelect from './duration/DurationDrinkSelect';
+import TimePassedSelect from './time/TimePassedSelect';
 import Result from './result/Result';
 
 import { 
@@ -112,26 +112,26 @@ export default function Form() {
           <Divider />
         </Box>
 
-        {/* <SnackSelect
+        <SnackSelect
           snack={snack} 
           onChange={e => setSnack(e.target.value)}
         ></SnackSelect>
         
         <Box component="div" mt={4}>
           <FormControl component="fieldset">
-            <DurationDrinkSlider 
+            <DurationDrinkSelect 
               value={duration} 
-              onChange={(e, value) => setDuration(value)}
-            ></DurationDrinkSlider>
+              onChange={(e, value) => setDuration(value.props.value)}
+            ></DurationDrinkSelect>
           </FormControl>
         </Box>
 
         <Box component="div" mt={2}>
           <FormControl component="fieldset">
-            <TimePassedSlider 
+            <TimePassedSelect 
               value={time} 
-              onChange={(e, value) => setTime(value)}
-            ></TimePassedSlider>
+              onChange={(e, value) => setTime(value.props.value)}
+            ></TimePassedSelect>
           </FormControl>
         </Box>
 
@@ -142,7 +142,7 @@ export default function Form() {
           snack={snack}
           duration={duration}
           time={time}
-        ></Result> */}
+        ></Result>
       </form>
     </Box>
   );

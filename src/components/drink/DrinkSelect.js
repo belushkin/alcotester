@@ -11,7 +11,7 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    minWidth: 160,
+    minWidth: 130,
     margin: theme.spacing(0, 2, 3, 0),
   },
 }));
@@ -67,7 +67,7 @@ export default function DrinkSelect(props) {
         </Select>
       </FormControl>
       <FormControl component="fieldset" className={classes.formControl}>
-        <InputLabel id="select-volume-label">Об'єм (мілілітри):</InputLabel>
+        <InputLabel id="select-volume-label">Об'єм (мл.):</InputLabel>
         <Select
           labelId="select-volume-label"
           id="select-volume"

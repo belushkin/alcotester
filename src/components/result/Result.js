@@ -20,10 +20,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#fff',
   },
   root: {
-    width: '100%',
-    '& > * + *': {
-      marginTop: theme.spacing(2),
-    },
+    width: '100%'
   },
 }));
 
@@ -125,7 +122,7 @@ export default function Result(props) {
           <Snackbar 
             open={openSnack} 
             anchorOrigin={{vertical: 'top', horizontal: 'center'}}
-            autoHideDuration={6000} 
+            autoHideDuration={9000} 
             onClose={handleCloseSnack}
           >
             <Alert onClose={handleCloseSnack} severity={severity}>
